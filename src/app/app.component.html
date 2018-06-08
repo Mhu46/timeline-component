@@ -15,7 +15,9 @@
     <h1>
       Please load the data
     </h1>
-    <input type="json" [(ngModel)]="data">
-    <button (click)="togglePage('timeline')">Load</button>
+    <input style="height: 400px; width: 600px;" type="text" [(ngModel)]="data">
+    <div class="button">
+      <button (click)="togglePage('timeline')">Load</button>      
+    </div>
   </div>
 </div>
