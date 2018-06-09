@@ -13,7 +13,7 @@ import { TimelineElement } from './timeline-element';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'horizontal-timeline',
+  selector: 'app-horizontal-timeline',
   templateUrl: 'horizontal-timeline.component.html',
   styleUrls: ['horizontal-timeline.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -202,7 +202,7 @@ export class HorizontalTimelineComponent implements AfterViewInit {
 
     let result: number = 0;
     for (let i = 1; i < elements.length; i++) {
-      let distance = HorizontalTimelineComponent.dayDiff(elements[i - 1].date, elements[i].date);
+      let distance = HorizontalTimelineComponent.dayDiff(elements[i - 1].start, elements[i].start);
       result = result ? Math.min(result, distance) : distance;
     }
     return result;
@@ -284,7 +284,7 @@ export class HorizontalTimelineComponent implements AfterViewInit {
   setTimelineWidth(elements: TimelineElement[], width: number, eventsMinLapse: number) {
     let timeSpan = 100;
     if (elements.length > 1) {
-      timeSpan = HorizontalTimelineComponent.dayDiff(elements[0].date, elements[elements.length - 1].date);
+      timeSpan = HorizontalTimelineComponent.dayDiff(elements[0].start, elements[elements.length - 1].start);
     }
     let timeSpanNorm = timeSpan / eventsMinLapse;
     timeSpanNorm = Math.round(timeSpanNorm) + 4;
@@ -326,7 +326,7 @@ export class HorizontalTimelineComponent implements AfterViewInit {
     let timelineEventsArray = this.timelineEvents.toArray();
     let i: number = 0;
     for (let component of elements) {
-      let distance = HorizontalTimelineComponent.dayDiff(elements[0].date, component.date);
+      let distance = HorizontalTimelineComponent.dayDiff(elements[0].start, component.start);
       let distanceNorm = Math.round(distance / eventsMinLapse);
       timelineEventsArray[i].nativeElement.style.left = distanceNorm * min + 'px';
       // span
